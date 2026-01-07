@@ -2,16 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PensiuneApp2.ClientPage"
-             Title="ClientPage">
-    
-    
+             Title="Gestionare Clienți">
+
     <StackLayout Margin="20">
         <Entry Placeholder="Nume" Text="{Binding Nume}" />
         <Entry Placeholder="Prenume" Text="{Binding Prenume}" />
         <Entry Placeholder="Email" Text="{Binding Email}" />
-        <Button Text="Salvează Client" Clicked="OnSaveButtonClicked" />
 
-        <ListView x:Name="listView" Margin="0,20,0,0">
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="Salvează Client" Clicked="OnSaveButtonClicked" />
+            <Button Grid.Column="1" Text="Șterge Selectat" Clicked="OnDeleteButtonClicked" BackgroundColor="Red" TextColor="White"/>
+        </Grid>
+
+        <ListView x:Name="listView" 
+                  Margin="0,20,0,0"
+                  ItemSelected="OnClientSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Nume}" Detail="{Binding Email}" />
@@ -19,6 +24,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
-    
+
 </ContentPage>

@@ -22,5 +22,16 @@
                 BackgroundColor="Green" 
                 TextColor="White" 
                 Margin="0,20,0,0" />
+
+        <ListView x:Name="listViewReservations" ItemSelected="OnReservationSelected" HeightRequest="300">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding CheckIn, StringFormat='{0:dd/MM/yyyy}'}" 
+                      Detail="ID Rezervare: {Binding ID}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Șterge Rezervare" Clicked="OnDeleteButtonClicked" BackgroundColor="Red" />
+        
     </StackLayout>
 </ContentPage>

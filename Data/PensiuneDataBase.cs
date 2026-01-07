@@ -80,5 +80,10 @@ namespace PensiuneApp2.Data
             return _database.DeleteAsync(client);
         }
 
+        public Task<int> DeleteReservationAsync(Reservation reservation)
+        {
+            return _database.DeleteAsync(reservation);
+        }
+
     }
 }

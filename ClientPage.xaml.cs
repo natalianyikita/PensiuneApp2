@@ -7,49 +7,56 @@ public partial class ClientPage : ContentPage
     public ClientPage()
     {
         InitializeComponent();
-        // Initializam BindingContext cu un obiect Client nou
         BindingContext = new Client();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        // incarcam lista de clienti din baza de date
         listView.ItemsSource = await App.Database.GetClientsAsync();
     }
 
+    // CREATE / UPDATE
     async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var client = (Client)BindingContext;
-        
-        // Validare minima sa avem macar numele completat
+
         if (!string.IsNullOrEmpty(client.Nume))
         {
             await App.Database.SaveClientAsync(client);
-            
-            // resetam formularul
-            BindingContext = new Client();
-            
-            // actualizam lista afisata
-            listView.ItemsSource = await App.Database.GetClientsAsync();
+            BindingContext = new Client(); // Resetare formular
+            listView.ItemsSource = await App.Database.GetClientsAsync(); // Refresh lista
         }
         else
         {
-            await DisplayAlert("Eroare", "V? rug?m s? introduce?i numele clientului.", "OK");
+            await DisplayAlert("Eroare", "Va rugam sa introduceti numele clientului.", "OK");
         }
     }
 
+    // READ (Populare formular la selectare)
+    async void OnClientSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem != null)
+        {
+            BindingContext = e.SelectedItem as Client;
+        }
+    }
+
+    // DELETE
     async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
-        var client = (Client)listView.SelectedItem;
-        if (client != null)
+        var client = (Client)BindingContext;
+
+        // Verificam daca clientul are un ID valid 
+        if (client.ID != 0)
         {
             await App.Database.DeleteClientAsync(client);
-            listView.ItemsSource = await App.Database.GetClientsAsync();
+            BindingContext = new Client(); // Resetare formular
+            listView.ItemsSource = await App.Database.GetClientsAsync(); // Refresh lista
         }
         else
         {
-            await DisplayAlert("Aten?ie", "Selecta?i un client din list? pentru a-l ?terge.", "OK");
+            await DisplayAlert("Atentie", "Selectati un client din lista pentru a-l sterge.", "OK");
         }
     }
 }

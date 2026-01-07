@@ -4,9 +4,9 @@ namespace PensiuneApp2;
 
 public partial class RoomPage : ContentPage
 {
-	public RoomPage()
-	{
-		InitializeComponent();
+    public RoomPage()
+    {
+        InitializeComponent();
         BindingContext = new Room();
     }
 
@@ -16,26 +16,48 @@ public partial class RoomPage : ContentPage
         listView.ItemsSource = await App.Database.GetRoomsAsync();
     }
 
+    // CREATE / UPDATE
     async void OnSaveButtonClicked(object sender, EventArgs e)
     {
         var room = (Room)BindingContext;
+        // Validare simpl?
         if (!string.IsNullOrEmpty(room.RoomNumber))
         {
-            await App.Database.SaveRoomAsync(room);
-            BindingContext = new Room();
+            await App.Database.SaveRoomAsync(room); 
+            BindingContext = new Room(); // Reset?m formularul
             listView.ItemsSource = await App.Database.GetRoomsAsync();
+        }
+        else
+        {
+            await DisplayAlert("Eroare", "Introduce?i num?rul camerei", "OK");
         }
     }
 
+    // PRELUARE DATE PENTRU UPDATE
+    async void OnRoomSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.SelectedItem != null)
+        {
+            // Popul?m editorul cu datele camerei selectate
+            BindingContext = e.SelectedItem as Room;
+        }
+    }
 
+    // DELETE
     async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
-        var room = listView.SelectedItem as Room;
-        if (room != null)
+        var room = (Room)BindingContext;
+
+        // Verific?m dac? exist? un ID valid (adic? dac? a fost selectat? o camer? existent?)
+        if (room.ID != 0)
         {
-            await App.Database.DeleteRoomAsync(room);
+            await App.Database.DeleteRoomAsync(room); 
+            BindingContext = new Room(); // Reset?m formularul
             listView.ItemsSource = await App.Database.GetRoomsAsync();
         }
+        else
+        {
+            await DisplayAlert("Aten?ie", "Selecta?i o camer? din list? pentru a o ?terge.", "OK");
+        }
     }
-
 }
