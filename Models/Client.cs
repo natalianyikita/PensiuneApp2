@@ -20,5 +20,10 @@ namespace PensiuneApp2.Models
 
             [OneToMany] 
             public List<Reservation> Reservations { get; set; }
+
+        public string NumeComplet
+        {
+            get { return Nume + " " + Prenume; }
         }
+    }
 }

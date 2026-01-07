@@ -8,8 +8,10 @@
         <Label Text="Selectează Camera:" FontAttributes="Bold" />
         <Picker x:Name="RoomPicker" Title="Alege o cameră" />
 
-        <Label Text="Nume Client:" FontAttributes="Bold" />
-        <Entry Text="{Binding CustomerName}" Placeholder="Introduceți numele" />
+        <Label Text="Selectează Clientul:" FontAttributes="Bold" />
+        <Picker x:Name="ClientPicker" 
+        Title="Alege un client din listă"
+        BackgroundColor="#f0f0f0" />
 
         <Label Text="Data Check-In:" FontAttributes="Bold" />
         <DatePicker Date="{Binding CheckIn}" />

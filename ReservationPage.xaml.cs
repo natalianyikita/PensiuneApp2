@@ -24,6 +24,11 @@ public partial class ReservationPage : ContentPage
         RoomPicker.ItemsSource = (System.Collections.IList)rooms;
         RoomPicker.ItemDisplayBinding = new Binding("RoomNumber");
 
+        var clients = await App.Database.GetClientsAsync();
+        ClientPicker.ItemsSource = (System.Collections.IList)clients;
+
+        ClientPicker.ItemDisplayBinding = new Binding("NumeComplet");
+
         // 2. Actualiz?m lista de rezerv?ri (CRUD - Read)
         listViewReservations.ItemsSource = await App.Database.GetReservationsAsync();
     }
@@ -33,10 +38,12 @@ public partial class ReservationPage : ContentPage
     {
         var reservation = (Reservation)BindingContext;
         Room selectedRoom = (RoomPicker.SelectedItem as Room);
+        Client selectedClient = (Client)ClientPicker.SelectedItem; 
 
         if (selectedRoom != null)
         {
             reservation.RoomID = selectedRoom.ID;
+            reservation.ClientID = selectedClient.ID;
             await App.Database.SaveReservationAsync(reservation);
 
             await DisplayAlert("Succes", "Rezervarea a fost salvata!", "OK");
