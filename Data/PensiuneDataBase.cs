@@ -41,9 +41,26 @@ namespace PensiuneApp2.Data
 
         //Operații pentru Rezervări
 
-        public Task<List<Reservation>> GetReservationsAsync()
+        public async Task<List<Reservation>> GetReservationsAsync()
         {
-            return _database.Table<Reservation>().ToListAsync(); 
+            // 1. Luăm lista simplă de rezervări
+            var reservations = await _database.Table<Reservation>().ToListAsync();
+
+            // 2. Pentru fiecare rezervare, căutăm manual detaliile despre Cameră și Client
+            foreach (var res in reservations)
+            {
+                // Găsim camera asociată
+                res.Room = await _database.Table<Room>()
+                                    .Where(r => r.ID == res.RoomID)
+                                    .FirstOrDefaultAsync();
+
+                // Găsim clientul asociat
+                res.Client = await _database.Table<Client>()
+                                      .Where(c => c.ID == res.ClientID)
+                                      .FirstOrDefaultAsync();
+            }
+
+            return reservations;
         }
 
 

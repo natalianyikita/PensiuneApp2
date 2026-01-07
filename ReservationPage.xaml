@@ -25,11 +25,37 @@
                 TextColor="White" 
                 Margin="0,20,0,0" />
 
-        <ListView x:Name="listViewReservations" ItemSelected="OnReservationSelected" HeightRequest="300">
+        <ListView x:Name="listViewReservations" 
+          ItemSelected="OnReservationSelected" 
+          HeightRequest="400"
+          HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding CheckIn, StringFormat='{0:dd/MM/yyyy}'}" 
-                      Detail="ID Rezervare: {Binding ID}" />
+                    <ViewCell>
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
+                            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, *">
+
+                                <Label Grid.Row="0" Grid.Column="0" 
+                               Text="{Binding Client.NumeComplet}" 
+                               FontAttributes="Bold" 
+                               TextColor="Black" />
+
+                                <Label Grid.Row="0" Grid.Column="1" 
+                               Text="{Binding Room.RoomNumber, StringFormat='Camera: {0}'}" 
+                               HorizontalOptions="End" 
+                               TextColor="Blue"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" 
+                               Text="{Binding CheckIn, StringFormat='In: {0:dd/MM/yyyy}'}" 
+                               FontSize="Small" />
+
+                                <Label Grid.Row="1" Grid.Column="1" 
+                               Text="{Binding CheckOut, StringFormat='Out: {0:dd/MM/yyyy}'}" 
+                               HorizontalOptions="End" 
+                               FontSize="Small" />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
