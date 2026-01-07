@@ -6,8 +6,12 @@
     <ContentPage.Content>
         <StackLayout Margin="20">
             <Editor Placeholder="Număr Cameră" Text="{Binding RoomNumber}" HeightRequest="50" />
-            <Editor Placeholder="Tip (Single/Double)" Text="{Binding Type}" HeightRequest="50" />
-
+            <Label Text="Tip Cameră:" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <Picker x:Name="TypePicker" 
+            Title="Alege tipul camerei"
+            SelectedItem="{Binding Type}">
+            </Picker>
+            
             <Grid ColumnDefinitions="*,*">
                 <Button Text="Salvează Cameră" Clicked="OnSaveButtonClicked" />
                 <Button Grid.Column="1" Text="Șterge Selectată" Clicked="OnDeleteButtonClicked" />

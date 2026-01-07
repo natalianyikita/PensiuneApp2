@@ -14,6 +14,16 @@ public partial class RoomPage : ContentPage
     {
         base.OnAppearing();
         listView.ItemsSource = await App.Database.GetRoomsAsync();
+
+        var tipuriCamere = new List<string>
+    {
+        "Single",
+        "Dubla",
+        "Tripla",
+        "Apartament"
+    };
+
+        TypePicker.ItemsSource = tipuriCamere;
     }
 
     // CREATE / UPDATE

@@ -1,24 +1,45 @@
-﻿namespace PensiuneApp2
+﻿namespace PensiuneApp2;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    public MainPage()
     {
-        int count = 0;
+        InitializeComponent();
+    }
 
-        public MainPage()
-        {
-            InitializeComponent();
-        }
+    // Navigare către pagina de Rezervări
+    async void OnReservationsClicked(object sender, EventArgs e)
+    {
+        // Animație simplă de apăsare
+        var border = (Border)sender;
+        await border.ScaleTo(0.95, 100);
+        await border.ScaleTo(1.0, 100);
 
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
+        // Navigare (folosim rutele din AppShell sau instanțiere directă)
+        // Varianta sigură:
+        await Navigation.PushAsync(new ReservationPage());
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        // Dacă ai rute definite în AppShell, poți folosi și:
+        // await Shell.Current.GoToAsync("//Rezervari");
+    }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+    // Navigare către pagina de Camere
+    async void OnRoomsClicked(object sender, EventArgs e)
+    {
+        var border = (Border)sender;
+        await border.ScaleTo(0.95, 100);
+        await border.ScaleTo(1.0, 100);
+
+        await Navigation.PushAsync(new RoomPage());
+    }
+
+    // Navigare către pagina de Clienți
+    async void OnClientsClicked(object sender, EventArgs e)
+    {
+        var border = (Border)sender;
+        await border.ScaleTo(0.95, 100);
+        await border.ScaleTo(1.0, 100);
+
+        await Navigation.PushAsync(new ClientPage());
     }
 }
