@@ -3,63 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PensiuneApp2.ReservationPage"
              Title="Rezervare Nouă">
-    <StackLayout Margin="20" Spacing="10">
 
-        <Label Text="Selectează Camera:" FontAttributes="Bold" />
-        <Picker x:Name="RoomPicker" Title="Alege o cameră" />
+    <Grid RowDefinitions="Auto, *, Auto" 
+          Padding="20" 
+          RowSpacing="10">
 
-        <Label Text="Selectează Clientul:" FontAttributes="Bold" />
-        <Picker x:Name="ClientPicker" 
-        Title="Alege un client din listă"
-        BackgroundColor="#f0f0f0" />
+        <ScrollView Grid.Row="0">
+            <StackLayout Spacing="10">
+                <Label Text="Selectează Clientul:" FontAttributes="Bold" />
+                <Picker x:Name="ClientPicker" Title="Alege un client din listă" BackgroundColor="#f0f0f0" />
 
-        <Label Text="Data Check-In:" FontAttributes="Bold" />
-        <DatePicker Date="{Binding CheckIn}" />
+                <Label Text="Selectează Camera:" FontAttributes="Bold" />
+                <Picker x:Name="RoomPicker" Title="Alege o cameră" BackgroundColor="#f0f0f0" />
 
-        <Label Text="Data Check-Out:" FontAttributes="Bold" />
-        <DatePicker Date="{Binding CheckOut}" />
+                <Label Text="Data Check-In:" FontAttributes="Bold" />
+                <DatePicker Date="{Binding CheckIn}" Format="dd/MM/yyyy" />
 
-        <Button Text="Salvează Rezervarea" 
-                Clicked="OnSaveButtonClicked" 
-                BackgroundColor="Green" 
-                TextColor="White" 
-                Margin="0,20,0,0" />
+                <Label Text="Data Check-Out:" FontAttributes="Bold" />
+                <DatePicker Date="{Binding CheckOut}" Format="dd/MM/yyyy" />
 
-        <ListView x:Name="listViewReservations" 
-          ItemSelected="OnReservationSelected" 
-          HeightRequest="400"
-          HasUnevenRows="True">
+                <Button Text="Salvează Rezervarea" 
+                        Clicked="OnSaveButtonClicked" 
+                        BackgroundColor="Green" 
+                        TextColor="White" 
+                        Margin="0,10,0,0" />
+            </StackLayout>
+        </ScrollView>
+
+        <ListView Grid.Row="1" 
+                  x:Name="listViewReservations" 
+                  ItemSelected="OnReservationSelected" 
+                  HasUnevenRows="True"
+                  Margin="0,10,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
+                        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="0,5">
                             <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, *">
-
                                 <Label Grid.Row="0" Grid.Column="0" 
-                               Text="{Binding Client.NumeComplet}" 
-                               FontAttributes="Bold" 
-                               TextColor="Black" />
+                                       Text="{Binding Client.NumeComplet}" 
+                                       FontAttributes="Bold" 
+                                       TextColor="Black" />
 
                                 <Label Grid.Row="0" Grid.Column="1" 
-                               Text="{Binding Room.RoomNumber, StringFormat='Camera: {0}'}" 
-                               HorizontalOptions="End" 
-                               TextColor="Blue"/>
+                                       Text="{Binding Room.RoomNumber, StringFormat='Camera: {0}'}" 
+                                       HorizontalOptions="End" 
+                                       TextColor="Blue"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" 
-                               Text="{Binding CheckIn, StringFormat='In: {0:dd/MM/yyyy}'}" 
-                               FontSize="Small" />
+                                       Text="{Binding CheckIn, StringFormat='In: {0:dd/MM/yyyy}'}" 
+                                       FontSize="Small" />
 
                                 <Label Grid.Row="1" Grid.Column="1" 
-                               Text="{Binding CheckOut, StringFormat='Out: {0:dd/MM/yyyy}'}" 
-                               HorizontalOptions="End" 
-                               FontSize="Small" />
+                                       Text="{Binding CheckOut, StringFormat='Out: {0:dd/MM/yyyy}'}" 
+                                       HorizontalOptions="End" 
+                                       FontSize="Small" />
                             </Grid>
                         </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Șterge Rezervare" Clicked="OnDeleteButtonClicked" BackgroundColor="Red" />
-        
-    </StackLayout>
+
+        <Button Grid.Row="2" 
+                Text="Șterge Rezervare" 
+                Clicked="OnDeleteButtonClicked" 
+                BackgroundColor="Red" 
+                TextColor="White"
+                Margin="0,5,0,0"/>
+
+    </Grid>
 </ContentPage>
