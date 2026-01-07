@@ -17,6 +17,11 @@
 
     <ShellContent
     Title="Rezervări"
-    ContentTemplate="{DataTemplate local:ReservationPage}" /> 
+    ContentTemplate="{DataTemplate local:ReservationPage}" />
+
+    <ShellContent
+            Title="Clienți"
+            Icon="client_icon.png"
+            ContentTemplate="{DataTemplate local:ClientPage}" />
 
 </Shell>
