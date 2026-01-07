@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PensiuneApp2.RoomPage"
+             Title="Gestionare Camere">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Editor Placeholder="Număr Cameră" Text="{Binding RoomNumber}" HeightRequest="50" />
+            <Editor Placeholder="Tip (Single/Double)" Text="{Binding Type}" HeightRequest="50" />
+
+            <Grid ColumnDefinitions="*,*">
+                <Button Text="Salvează Cameră" Clicked="OnSaveButtonClicked" />
+                <Button Grid.Column="1" Text="Șterge Selectată" Clicked="OnDeleteButtonClicked" />
+            </Grid>
+
+            <ListView x:Name="listView" Margin="0,20,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding RoomNumber}" Detail="{Binding Type}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
