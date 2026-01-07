@@ -38,28 +38,33 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="0,5">
+                        <Border Stroke="Gray" 
+                    StrokeThickness="1" 
+                    StrokeShape="RoundRectangle 5" 
+                    Padding="10" 
+                    Margin="0,5">
+
                             <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, *">
                                 <Label Grid.Row="0" Grid.Column="0" 
-                                       Text="{Binding Client.NumeComplet}" 
-                                       FontAttributes="Bold" 
-                                       TextColor="Black" />
+                           Text="{Binding Client.NumeComplet}" 
+                           FontAttributes="Bold" 
+                           TextColor="Black" />
 
                                 <Label Grid.Row="0" Grid.Column="1" 
-                                       Text="{Binding Room.RoomNumber, StringFormat='Camera: {0}'}" 
-                                       HorizontalOptions="End" 
-                                       TextColor="Blue"/>
+                           Text="{Binding Room.RoomNumber, StringFormat='Camera: {0}'}" 
+                           HorizontalOptions="End" 
+                           TextColor="Blue"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" 
-                                       Text="{Binding CheckIn, StringFormat='In: {0:dd/MM/yyyy}'}" 
-                                       FontSize="Small" />
+                           Text="{Binding CheckIn, StringFormat='In: {0:dd/MM/yyyy}'}" 
+                           FontSize="Small" />
 
                                 <Label Grid.Row="1" Grid.Column="1" 
-                                       Text="{Binding CheckOut, StringFormat='Out: {0:dd/MM/yyyy}'}" 
-                                       HorizontalOptions="End" 
-                                       FontSize="Small" />
+                           Text="{Binding CheckOut, StringFormat='Out: {0:dd/MM/yyyy}'}" 
+                           HorizontalOptions="End" 
+                           FontSize="Small" />
                             </Grid>
-                        </Frame>
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
