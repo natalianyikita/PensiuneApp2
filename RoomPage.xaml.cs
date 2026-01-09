@@ -39,7 +39,7 @@ public partial class RoomPage : ContentPage
         }
         else
         {
-            await DisplayAlert("Eroare", "Introduce?i num?rul camerei", "OK");
+            await DisplayAlert("Eroare", "Introduceti numarul camerei", "OK");
         }
     }
 
@@ -58,7 +58,7 @@ public partial class RoomPage : ContentPage
     {
         var room = (Room)BindingContext;
 
-        // Verific?m dac? exist? un ID valid (adic? dac? a fost selectat? o camer? existent?)
+        // Verificam daca exista un ID valid (adica daca a fost selectata o camera existenta)
         if (room.ID != 0)
         {
             await App.Database.DeleteRoomAsync(room); 
@@ -67,7 +67,7 @@ public partial class RoomPage : ContentPage
         }
         else
         {
-            await DisplayAlert("Aten?ie", "Selecta?i o camer? din list? pentru a o ?terge.", "OK");
+            await DisplayAlert("Atentie", "Selectati o camera din lista pentru a o sterge.", "OK");
         }
     }
 }

@@ -7,23 +7,21 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    // Navigare către pagina de Rezervări
+    // Navigare catre pagina de Rezervari
     async void OnReservationsClicked(object sender, EventArgs e)
     {
-        // Animație simplă de apăsare
+        // Animatie simplă de apasare
         var border = (Border)sender;
         await border.ScaleTo(0.95, 100);
         await border.ScaleTo(1.0, 100);
 
-        // Navigare (folosim rutele din AppShell sau instanțiere directă)
-        // Varianta sigură:
+
         await Navigation.PushAsync(new ReservationPage());
 
-        // Dacă ai rute definite în AppShell, poți folosi și:
-        // await Shell.Current.GoToAsync("//Rezervari");
+
     }
 
-    // Navigare către pagina de Camere
+    // Navigare catre pagina de Camere
     async void OnRoomsClicked(object sender, EventArgs e)
     {
         var border = (Border)sender;
@@ -33,7 +31,7 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(new RoomPage());
     }
 
-    // Navigare către pagina de Clienți
+    // Navigare catre pagina de Clienti
     async void OnClientsClicked(object sender, EventArgs e)
     {
         var border = (Border)sender;

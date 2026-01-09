@@ -21,10 +21,10 @@ namespace PensiuneApp2.Data
             _database.CreateTableAsync<Client>().Wait();
         }
 
-        // Exemplu operație Read (Get all rooms)
+        //  (Get all rooms)
         public Task<List<Room>> GetRoomsAsync() => _database.Table<Room>().ToListAsync();
 
-        //Operație Create/Update Room
+        // Create/Update Room
         public Task<int> SaveRoomAsync(Room room)
         {
             return room.ID != 0 ? _database.UpdateAsync(room) : _database.InsertAsync(room);
@@ -32,21 +32,21 @@ namespace PensiuneApp2.Data
         }
 
 
-        //Operații pentru Camere
+        //Operatii camere
 
         public Task<int> DeleteRoomAsync(Room room)
         {
             return _database.DeleteAsync(room); 
         }
 
-        //Operații pentru Rezervări
+        //Operatii pentru Rezervări
 
         public async Task<List<Reservation>> GetReservationsAsync()
         {
-            // 1. Luăm lista simplă de rezervări
+            //  Luam lista de rezervari
             var reservations = await _database.Table<Reservation>().ToListAsync();
 
-            // 2. Pentru fiecare rezervare, căutăm manual detaliile despre Cameră și Client
+          
             foreach (var res in reservations)
             {
                 // Găsim camera asociată
@@ -64,7 +64,7 @@ namespace PensiuneApp2.Data
         }
 
 
-        //Operații pentru Rezervări
+        //Operatii pentru Rezervari
 
         public Task<int> SaveReservationAsync(Reservation reservation)
         {
